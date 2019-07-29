@@ -13,7 +13,7 @@ public class LivroRepository implements ITxtRepository<Livro> {
 	private static final String fileName = "Livros.txt";
 
 	private int id() throws IOException {
-		return Utils.getLastId(fileName);
+		return Utils.getNextId(fileName);
 	}
 
 	@Override

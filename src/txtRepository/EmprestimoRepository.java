@@ -7,6 +7,8 @@ import model.Emprestimo;
 
 public class EmprestimoRepository implements ITxtRepository<Emprestimo> {
 
+	private static final String fileName = "Emprestimos.txt";
+
 	@Override
 	public Emprestimo getById(int id) {
 		// TODO Auto-generated method stub
@@ -34,7 +36,7 @@ public class EmprestimoRepository implements ITxtRepository<Emprestimo> {
 	@Override
 	public void deleteById(int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

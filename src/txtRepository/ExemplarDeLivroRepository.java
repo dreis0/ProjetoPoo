@@ -7,6 +7,8 @@ import model.ExemplarDeLivro;
 
 public class ExemplarDeLivroRepository implements ITxtRepository<ExemplarDeLivro> {
 
+	public static String fileName = "Exemplares.txt";
+	
 	@Override
 	public ExemplarDeLivro getById(int id) {
 		// TODO Auto-generated method stub

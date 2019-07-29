@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public abstract class Usuario {
 
 	protected int id;
@@ -12,8 +14,16 @@ public abstract class Usuario {
 
 	protected String senha;
 
+	protected String documento;
+
+	protected Date multaAte;
+
 	public Usuario(TipoDeUsuario tipo) {
 		this.tipo = tipo;
+	}
+
+	public TipoDeUsuario getTipo() {
+		return this.tipo;
 	}
 
 	public String getNome() {
@@ -42,6 +52,26 @@ public abstract class Usuario {
 
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Date getMultaAte() {
+		return multaAte;
+	}
+
+	public void setMultaAte(Date multaAte) {
+		this.multaAte = multaAte;
+	}
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
 	}
 
 }

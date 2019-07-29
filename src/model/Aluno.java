@@ -1,18 +1,9 @@
 package model;
 
-public class Aluno extends UsuarioComum{
+public class Aluno extends Usuario {
 
-	public String RA;
-	
-	public Aluno(TipoDeUsuario tipo, String nome, String email, String senha) {
+	public Aluno() {
 		super(TipoDeUsuario.aluno);
 	}
 
-	public String getRA() {
-		return RA;
-	}
-
-	public void setRA(String rA) {
-		RA = rA;
-	}
 }
