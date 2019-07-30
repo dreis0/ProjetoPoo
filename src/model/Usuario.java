@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public abstract class Usuario {
@@ -8,15 +9,15 @@ public abstract class Usuario {
 
 	protected TipoDeUsuario tipo;
 
-	protected String nome;
+	protected String nome = "";
 
-	protected String email;
+	protected String email = "";
 
-	protected String senha;
+	protected String senha = "";
 
-	protected String documento;
+	protected String documento = "";
 
-	protected Date multaAte;
+	protected Date multaAte = Calendar.getInstance().getTime();
 
 	public Usuario(TipoDeUsuario tipo) {
 		this.tipo = tipo;

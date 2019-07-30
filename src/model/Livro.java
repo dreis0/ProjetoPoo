@@ -4,9 +4,9 @@ public class Livro {
 
 	protected int id;
 
-	protected String titulo;
+	protected String titulo = "";
 
-	protected String autor;
+	protected String autor = "";
 
 	public void setId(int id) {
 		this.id = id;
