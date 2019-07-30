@@ -1,7 +1,11 @@
 package model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import utils.Strings;
 
 public abstract class Usuario {
 
@@ -17,7 +21,7 @@ public abstract class Usuario {
 
 	protected String documento = "";
 
-	protected Date multaAte = Calendar.getInstance().getTime();
+	protected Date multaAte = new Date();
 
 	public Usuario(TipoDeUsuario tipo) {
 		this.tipo = tipo;
@@ -72,6 +76,11 @@ public abstract class Usuario {
 
 	public void setMultaAte(Date multaAte) {
 		this.multaAte = multaAte;
+	}
+
+	public void setMultaAte(String multaAte) throws ParseException {
+		System.out.println(multaAte);
+		this.multaAte = Strings.FORMATO_DATA_GENERICO.parse(multaAte);;
 	}
 
 	public String getDocumento() {

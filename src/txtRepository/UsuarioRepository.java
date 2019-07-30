@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
-
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import exceptions.NotFoundException;
@@ -33,7 +33,7 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 	}
 
 	@Override
-	public Usuario getById(int id) throws FileNotFoundException, IOException, NotFoundException {
+	public Usuario getById(int id) throws FileNotFoundException, IOException, NotFoundException, ParseException {
 		ArrayList<Usuario> usuarios = get();
 
 		for (Usuario u : usuarios) {
@@ -45,7 +45,7 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 	}
 
 	@Override
-	public ArrayList<Usuario> get() throws FileNotFoundException, IOException, IllegalArgumentException {
+	public ArrayList<Usuario> get() throws FileNotFoundException, IOException, IllegalArgumentException, ParseException {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
 		String currentLine;
@@ -93,7 +93,7 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 	}
 
 	@Override
-	public Usuario update(Usuario model) throws IOException, FileNotFoundException {
+	public Usuario update(Usuario model) throws IOException, FileNotFoundException, ParseException {
 		ArrayList<Usuario> usuarios = get();
 
 		for (Usuario u : usuarios) {
@@ -119,7 +119,7 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 	}
 
 	@Override
-	public void deleteById(int id) throws IOException, FileNotFoundException {
+	public void deleteById(int id) throws IOException, FileNotFoundException, ParseException {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
 		String currentLine;

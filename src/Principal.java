@@ -14,7 +14,7 @@ public class Principal {
 		try (UsuarioRepository repository = UsuarioRepository.instance()) {
 			//repository.insert(aluno);
 			
-			repository.deleteById(2);
+			repository.deleteById(7);
 		} catch (Exception e) {
 			System.out.println("Exception em Principal: " + e);
 		}
