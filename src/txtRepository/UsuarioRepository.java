@@ -1,90 +1,140 @@
 package txtRepository;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
+import exceptions.NotFoundException;
 import interfaces.ITxtRepository;
 import model.Usuario;
-import model.Bibliotecario;
-import model.Master;
-import model.TipoDeUsuario;
 
-public class UsuarioRepository implements ITxtRepository<Usuario> {
+public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRepository<Usuario> {
 
 	private static final String fileName = "Usuarios.txt";
+	private static UsuarioRepository instance;
+	
+	private UsuarioRepository() throws IOException, FileNotFoundException {
+		super(fileName);
+	}
 
+	private UsuarioRepository instance() throws FileNotFoundException, IOException{
+		if(instance == null)
+			instance = new UsuarioRepository();
+		return instance;
+	}
+	
 	private int id() throws IOException {
 		return Utils.getNextId(fileName);
 	}
 
 	@Override
-	public Usuario getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario getById(int id) throws FileNotFoundException, IOException, NotFoundException {
+		ArrayList<Usuario> usuarios = get();
+
+		for (Usuario u : usuarios) {
+			if (u.getId() == id)
+				return u;
+		}
+
+		throw new NotFoundException("Usuário");
 	}
 
 	@Override
 	public ArrayList<Usuario> get() throws FileNotFoundException, IOException {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
-		try {
-			String currentLine = reader.readLine();
+		String currentLine = reader.readLine();
 
-			while (currentLine != null) {
-				String[] fields = currentLine.split(";");
+		while (currentLine != null) {
+			String[] fields = currentLine.split(";");
 
-				Usuario user = Utils.instance(Utils.ToEnum(fields[2]));
-				user.setId(Integer.parseInt(fields[0]));
-				user.setNome(fields[1]);
-				user.setEmail(fields[3]);
-				user.setSenha(fields[4]);
-				user.setMultaAte(new Date());
-			}
+			Usuario u = Utils.instance(Utils.ToEnum(fields[2]));
+			u.setId(Integer.parseInt(fields[0]));
+			u.setNome(fields[1]);
+			u.setEmail(fields[3]);
+			u.setSenha(fields[4]);
+			u.setMultaAte(new Date(fields[5]));
 
-		} catch (Exception e) {
-			// TODO: handle exception
+			usuarios.add(u);
 		}
 
-		return null;
+		return usuarios;
 	}
 
 	public Usuario insert(Usuario model) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+
+		ArrayList<Usuario> usuarios = get();
+
+		for (Usuario u : usuarios) {
+			writer.write(u.getId() + ";");
+			writer.write(u.getNome() + ";");
+			writer.write(u.getTipo().ordinal() + ";");
+			writer.write(u.getEmail() + ";");
+			writer.write(u.getSenha() + ";");
+			writer.write(u.getMultaAte() + ";");
+			writer.write(u.getDocumento() + "\n");
+		}
 
 		model.setId(id());
 
-		try {
-			writer.write(model.getId() + " ;");
-			writer.write(model.getNome() + " ;");
-			writer.write(model.getTipo().ordinal() + " ;");
-			writer.write(model.getEmail() + " ;");
-			writer.write(model.getSenha() + " ;");
-			writer.write(model.getMultaAte() + " ;");
-			writer.write(model.getDocumento() + "\n");
-
-		} finally {
-			writer.close();
-		}
+		writer.write(model.getId() + ";");
+		writer.write(model.getNome() + ";");
+		writer.write(model.getTipo().ordinal() + ";");
+		writer.write(model.getEmail() + ";");
+		writer.write(model.getSenha() + ";");
+		writer.write(model.getMultaAte() + ";");
+		writer.write(model.getDocumento() + "\n");
 
 		return model;
 	}
 
 	@Override
-	public Usuario update(Usuario model) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario update(Usuario model) throws IOException, FileNotFoundException {
+		ArrayList<Usuario> usuarios = get();
+
+		for (Usuario u : usuarios) {
+			if (u.getId() != model.getId()) {
+				writer.write(u.getId() + ";");
+				writer.write(u.getNome() + ";");
+				writer.write(u.getTipo().ordinal() + ";");
+				writer.write(u.getEmail() + ";");
+				writer.write(u.getSenha() + ";");
+				writer.write(u.getMultaAte() + ";");
+				writer.write(u.getDocumento() + "\n");
+			} else {
+				writer.write(model.getId() + ";");
+				writer.write(model.getNome() + ";");
+				writer.write(model.getTipo().ordinal() + ";");
+				writer.write(model.getEmail() + ";");
+				writer.write(model.getSenha() + ";");
+				writer.write(model.getMultaAte() + ";");
+				writer.write(model.getDocumento() + "\n");
+			}
+		}
+		return model;
 	}
 
 	@Override
-	public void deleteById(int id) {
-		// TODO Auto-generated method stub
+	public void deleteById(int id) throws IOException, FileNotFoundException {
+		ArrayList<Usuario> usuarios = get();
 
+		for (Usuario u : usuarios) {
+			if (u.getId() != id) {
+				writer.write(u.getId() + ";");
+				writer.write(u.getNome() + ";");
+				writer.write(u.getTipo().ordinal() + ";");
+				writer.write(u.getEmail() + ";");
+				writer.write(u.getSenha() + ";");
+				writer.write(u.getMultaAte() + ";");
+				writer.write(u.getDocumento() + "\n");
+			}
+		}
 	}
 
+	@Override
+	public void close() throws Exception {
+		super.close();
+		instance = null;
+	}
 }

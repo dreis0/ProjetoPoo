@@ -1,11 +1,14 @@
 package interfaces;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public interface ITxtRepository<T> {
+import exceptions.NotFoundException;
 
-	public T getById(int id) throws IOException;
+public interface ITxtRepository<T> extends AutoCloseable {
+
+	public T getById(int id) throws IOException, FileNotFoundException, NotFoundException;
 
 	public ArrayList<T> get() throws IOException;
 

@@ -1,14 +1,20 @@
 package txtRepository;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import interfaces.ITxtRepository;
 import model.Emprestimo;
 
-public class EmprestimoRepository implements ITxtRepository<Emprestimo> {
+public class EmprestimoRepository extends BaseRepository implements ITxtRepository<Emprestimo> {
 
 	private static final String fileName = "Emprestimos.txt";
-
+	
+	private EmprestimoRepository() throws FileNotFoundException, IOException {
+		super(fileName);
+	}
+	
 	@Override
 	public Emprestimo getById(int id) {
 		// TODO Auto-generated method stub
