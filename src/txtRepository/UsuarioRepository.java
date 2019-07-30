@@ -45,7 +45,8 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 	}
 
 	@Override
-	public ArrayList<Usuario> get() throws FileNotFoundException, IOException, IllegalArgumentException, ParseException {
+	public ArrayList<Usuario> get()
+			throws FileNotFoundException, IOException, IllegalArgumentException, ParseException {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
 		String currentLine;
@@ -77,7 +78,8 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 		return model;
 	}
 
-	private void insertAll(ArrayList<Usuario> usuarios) throws IOException {
+	@Override
+	protected void insertAll(ArrayList<Usuario> usuarios) throws IOException, FileNotFoundException {
 		File usuariosFile = new File("Usuarios.txt");
 
 		BufferedWriter writer = new BufferedWriter(new FileWriter(usuariosFile));

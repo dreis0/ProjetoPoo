@@ -40,6 +40,12 @@ public class EmprestimoRepository extends BaseRepository<Emprestimo> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	protected void insertAll(ArrayList<Emprestimo> list) throws IOException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public Emprestimo update(Emprestimo model) throws IOException, FileNotFoundException {
