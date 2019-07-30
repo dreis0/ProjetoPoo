@@ -13,17 +13,17 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 
 	private static final String fileName = "Usuarios.txt";
 	private static UsuarioRepository instance;
-	
+
 	private UsuarioRepository() throws IOException, FileNotFoundException {
 		super(fileName);
 	}
 
-	private UsuarioRepository instance() throws FileNotFoundException, IOException{
-		if(instance == null)
+	public static UsuarioRepository instance() throws FileNotFoundException, IOException {
+		if (instance == null)
 			instance = new UsuarioRepository();
 		return instance;
 	}
-	
+
 	private int id() throws IOException {
 		return Utils.getNextId(fileName);
 	}
@@ -63,7 +63,7 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 	}
 
 	public Usuario insert(Usuario model) throws IOException {
-
+		System.out.println("insert");
 		ArrayList<Usuario> usuarios = get();
 
 		for (Usuario u : usuarios) {
@@ -76,9 +76,7 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 			writer.write(u.getDocumento() + "\n");
 		}
 
-		model.setId(id());
-
-		writer.write(model.getId() + ";");
+		writer.write(id() + ";");
 		writer.write(model.getNome() + ";");
 		writer.write(model.getTipo().ordinal() + ";");
 		writer.write(model.getEmail() + ";");

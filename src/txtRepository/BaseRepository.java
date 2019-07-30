@@ -23,6 +23,7 @@ public abstract class BaseRepository<T> implements ITxtRepository<T>, AutoClosea
 		this.reader = new BufferedReader(new FileReader(fileName));
 	}
 
+	
 	@Override
 	public void close() throws Exception {
 		writer.close();

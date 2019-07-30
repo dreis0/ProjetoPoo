@@ -1,60 +1,49 @@
 package txtRepository;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import interfaces.ITxtRepository;
+import exceptions.NotFoundException;
 import model.Livro;
 
-public class LivroRepository implements ITxtRepository<Livro> {
+public class LivroRepository extends BaseRepository<Livro> {
 
 	private static final String fileName = "Livros.txt";
+	private static LivroRepository instance;
 
-	private int id() throws IOException {
-		return Utils.getNextId(fileName);
+	private LivroRepository() throws IOException, FileNotFoundException {
+		super(fileName);
+	}
+
+	public LivroRepository instance() throws IOException, FileNotFoundException {
+		if(instance == null)
+			instance = new LivroRepository();
+		return instance;
 	}
 
 	@Override
-	public Livro getById(int id) throws IOException {
+	public Livro getById(int id) throws IOException, FileNotFoundException, NotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Livro> get() throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(fileName));
-		ArrayList<Livro> livros = new ArrayList<Livro>();
-
-		try {
-			String line = reader.readLine();
-			while (line != null) {
-				String[] dados = line.split(";");
-
-				Livro l = new Livro();
-				l.setId(Integer.parseInt(dados[0]));
-				l.setTitulo(dados[1]);
-				l.setAutor(dados[2]);
-
-				livros.add(l);
-			}
-
-		} finally {
-			reader.close();
-		}
-
-		return livros;
-	}
-
-	@Override
-	public Livro insert(Livro model) throws IOException {
+	public ArrayList<Livro> get() throws IOException, FileNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Livro update(Livro model) throws IOException {
+	public Livro insert(Livro model) throws IOException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Livro update(Livro model) throws IOException, FileNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -64,5 +53,4 @@ public class LivroRepository implements ITxtRepository<Livro> {
 		// TODO Auto-generated method stub
 
 	}
-
 }
