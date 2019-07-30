@@ -12,9 +12,11 @@ public class Principal {
 		aluno.setSenha("123");
 
 		try (UsuarioRepository repository = UsuarioRepository.instance()) {
-			repository.insert(aluno);
+			//repository.insert(aluno);
+			
+			repository.deleteById(2);
 		} catch (Exception e) {
-			System.out.println(e.getLocalizedMessage());
+			System.out.println("Exception em Principal: " + e);
 		}
 	}
 
