@@ -43,6 +43,12 @@ public class LivroRepository extends BaseRepository<Livro> {
 	}
 
 	@Override
+	protected void insertAll(ArrayList<Livro> list) throws IOException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public Livro update(Livro model) throws IOException, FileNotFoundException {
 		// TODO Auto-generated method stub
 		return null;

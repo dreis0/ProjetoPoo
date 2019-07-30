@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import interfaces.ITxtRepository;
+import model.Usuario;
 
 public abstract class BaseRepository<T> implements ITxtRepository<T>, AutoCloseable {
 
@@ -23,6 +24,7 @@ public abstract class BaseRepository<T> implements ITxtRepository<T>, AutoClosea
 		this.reader = new BufferedReader(new FileReader(fileName));
 	}
 
+	protected abstract void insertAll(ArrayList<T> list) throws IOException, FileNotFoundException; 
 	
 	@Override
 	public void close() throws Exception {
