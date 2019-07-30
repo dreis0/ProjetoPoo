@@ -23,38 +23,45 @@ public abstract class Usuario {
 		this.tipo = tipo;
 	}
 
+	private String formatEntries(String str) {
+		if (str == null)
+			return "";
+		else
+			return str;
+	}
+
 	public TipoDeUsuario getTipo() {
 		return this.tipo;
 	}
 
 	public String getNome() {
-		return nome;
+		return formatEntries(nome);
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = formatEntries(nome);
 	}
 
 	public String getEmail() {
-		return email;
+		return formatEntries(email);
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = formatEntries(email);
 	}
 
 	public String getSenha() {
-		return senha;
+		return formatEntries(senha);
 	}
 
 	public void setSenha(String senha) {
-		this.senha = senha;
+		this.senha = (senha);
 	}
 
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -68,11 +75,10 @@ public abstract class Usuario {
 	}
 
 	public String getDocumento() {
-		return documento;
+		return formatEntries(documento);
 	}
 
 	public void setDocumento(String documento) {
-		this.documento = documento;
+		this.documento = formatEntries(documento);
 	}
-
 }

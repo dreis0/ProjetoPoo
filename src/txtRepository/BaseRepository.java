@@ -19,7 +19,7 @@ public abstract class BaseRepository<T> implements ITxtRepository<T>, AutoClosea
 	
 	protected BaseRepository(String fileName) 
 			throws FileNotFoundException, IOException {
-		this.writer = new BufferedWriter(new FileWriter(fileName));
+		this.writer = new BufferedWriter(new FileWriter(fileName, true));
 		this.reader = new BufferedReader(new FileReader(fileName));
 	}
 

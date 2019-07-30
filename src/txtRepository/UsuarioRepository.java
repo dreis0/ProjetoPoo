@@ -1,13 +1,17 @@
 package txtRepository;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.Date;
 
 import exceptions.NotFoundException;
 import interfaces.ITxtRepository;
 import model.Usuario;
+import utils.Strings;
 
 public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRepository<Usuario> {
 
@@ -37,24 +41,25 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 				return u;
 		}
 
-		throw new NotFoundException("Usuário");
+		throw new NotFoundException("Usuï¿½rio");
 	}
 
 	@Override
-	public ArrayList<Usuario> get() throws FileNotFoundException, IOException {
+	public ArrayList<Usuario> get() throws FileNotFoundException, IOException, IllegalArgumentException {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
-		String currentLine = reader.readLine();
+		String currentLine;
 
-		while (currentLine != null) {
-			String[] fields = currentLine.split(";");
+		while ((currentLine = reader.readLine()) != null) {
+			String[] fields = currentLine.split(Strings.DELIMITADOR);
 
 			Usuario u = Utils.instance(Utils.ToEnum(fields[2]));
 			u.setId(Integer.parseInt(fields[0]));
 			u.setNome(fields[1]);
 			u.setEmail(fields[3]);
 			u.setSenha(fields[4]);
-			u.setMultaAte(new Date(fields[5]));
+			u.setMultaAte(fields[5]);
+			u.setDocumento(fields[6]);
 
 			usuarios.add(u);
 		}
@@ -64,27 +69,27 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 
 	public Usuario insert(Usuario model) throws IOException {
 		System.out.println("insert");
-		ArrayList<Usuario> usuarios = get();
 
-		for (Usuario u : usuarios) {
-			writer.write(u.getId() + ";");
-			writer.write(u.getNome() + ";");
-			writer.write(u.getTipo().ordinal() + ";");
-			writer.write(u.getEmail() + ";");
-			writer.write(u.getSenha() + ";");
-			writer.write(u.getMultaAte() + ";");
-			writer.write(u.getDocumento() + "\n");
-		}
-
-		writer.write(id() + ";");
-		writer.write(model.getNome() + ";");
-		writer.write(model.getTipo().ordinal() + ";");
-		writer.write(model.getEmail() + ";");
-		writer.write(model.getSenha() + ";");
-		writer.write(model.getMultaAte() + ";");
-		writer.write(model.getDocumento() + "\n");
+		writer.append(id() + Strings.DELIMITADOR + model.getNome() + Strings.DELIMITADOR + model.getTipo().ordinal()
+				+ Strings.DELIMITADOR + model.getEmail() + Strings.DELIMITADOR + model.getSenha() + Strings.DELIMITADOR
+				+ model.getMultaAte() + Strings.DELIMITADOR + model.getDocumento() + "\n");
 
 		return model;
+	}
+
+	private void insertAll(ArrayList<Usuario> usuarios) throws IOException {
+		File usuariosFile = new File("Usuarios.txt");
+
+		BufferedWriter writer = new BufferedWriter(new FileWriter(usuariosFile));
+
+		for (Usuario u : usuarios) {
+			writer.append(u.getId() + Strings.DELIMITADOR + u.getNome() + Strings.DELIMITADOR + u.getTipo().ordinal()
+					+ Strings.DELIMITADOR + u.getEmail() + Strings.DELIMITADOR + u.getSenha() + Strings.DELIMITADOR
+					+ u.getMultaAte() + Strings.DELIMITADOR + u.getDocumento() + "\n");
+		}
+
+		writer.close();
+		usuariosFile.delete();
 	}
 
 	@Override
@@ -115,19 +120,28 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 
 	@Override
 	public void deleteById(int id) throws IOException, FileNotFoundException {
-		ArrayList<Usuario> usuarios = get();
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
-		for (Usuario u : usuarios) {
-			if (u.getId() != id) {
-				writer.write(u.getId() + ";");
-				writer.write(u.getNome() + ";");
-				writer.write(u.getTipo().ordinal() + ";");
-				writer.write(u.getEmail() + ";");
-				writer.write(u.getSenha() + ";");
-				writer.write(u.getMultaAte() + ";");
-				writer.write(u.getDocumento() + "\n");
-			}
+		String currentLine;
+
+		while ((currentLine = reader.readLine()) != null) {
+			String[] fields = currentLine.split(Strings.DELIMITADOR);
+
+			Usuario u = Utils.instance(Utils.ToEnum(fields[2]));
+			if (Integer.parseInt(fields[0]) == id)
+				continue;
+
+			u.setId(Integer.parseInt(fields[0]));
+			u.setNome(fields[1]);
+			u.setEmail(fields[3]);
+			u.setSenha(fields[4]);
+			u.setMultaAte(fields[5]);
+			u.setDocumento(fields[6]);
+
+			usuarios.add(u);
 		}
+
+		insertAll(usuarios);
 	}
 
 	@Override
