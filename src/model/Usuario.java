@@ -1,8 +1,6 @@
 package model;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import utils.Strings;
@@ -23,10 +21,6 @@ public abstract class Usuario {
 
 	protected Date multaAte = new Date();
 
-	public Usuario(TipoDeUsuario tipo) {
-		this.tipo = tipo;
-	}
-
 	private String formatEntries(String str) {
 		if (str == null)
 			return "";
@@ -34,6 +28,10 @@ public abstract class Usuario {
 			return str;
 	}
 
+	public Usuario(TipoDeUsuario tipo) {
+		this.tipo = tipo;
+	}
+	
 	public TipoDeUsuario getTipo() {
 		return this.tipo;
 	}
@@ -79,7 +77,6 @@ public abstract class Usuario {
 	}
 
 	public void setMultaAte(String multaAte) throws ParseException {
-		System.out.println(multaAte);
 		this.multaAte = Strings.FORMATO_DATA_GENERICO.parse(multaAte);;
 	}
 

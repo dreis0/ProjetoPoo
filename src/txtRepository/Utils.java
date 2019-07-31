@@ -37,13 +37,13 @@ public class Utils {
 	}
 	
 	public static TipoDeUsuario ToEnum(String enumAsString) {
-		if(enumAsString == "0")
+		if(enumAsString.equals("0"))
 			return TipoDeUsuario.master;
-		if(enumAsString == "1")
+		if(enumAsString.equals("1"))
 			return TipoDeUsuario.bibliotecario;
-		if(enumAsString == "2")
+		if (enumAsString.equals("2"))
 			return TipoDeUsuario.aluno;
-		if(enumAsString == "3")
+		if(enumAsString.equals("3"))
 			return TipoDeUsuario.professor;
 		else 
 			return TipoDeUsuario.externo;			

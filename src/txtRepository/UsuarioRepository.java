@@ -1,9 +1,10 @@
 package txtRepository;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -50,10 +51,9 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
 		String currentLine;
-
+		reader = new BufferedReader(new FileReader(fileName));
 		while ((currentLine = reader.readLine()) != null) {
 			String[] fields = currentLine.split(Strings.DELIMITADOR);
-
 			Usuario u = Utils.instance(Utils.ToEnum(fields[2]));
 			u.setId(Integer.parseInt(fields[0]));
 			u.setNome(fields[1]);
@@ -80,9 +80,8 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 
 	@Override
 	protected void insertAll(ArrayList<Usuario> usuarios) throws IOException, FileNotFoundException {
-		File usuariosFile = new File("Usuarios.txt");
 
-		BufferedWriter writer = new BufferedWriter(new FileWriter(usuariosFile));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
 
 		for (Usuario u : usuarios) {
 			writer.append(u.getId() + Strings.DELIMITADOR + u.getNome() + Strings.DELIMITADOR + u.getTipo().ordinal()
@@ -91,32 +90,22 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 		}
 
 		writer.close();
-		usuariosFile.delete();
 	}
 
 	@Override
 	public Usuario update(Usuario model) throws IOException, FileNotFoundException, ParseException {
+		ArrayList<Usuario> updatedUsuarios = new ArrayList<Usuario>();
 		ArrayList<Usuario> usuarios = get();
 
 		for (Usuario u : usuarios) {
 			if (u.getId() != model.getId()) {
-				writer.write(u.getId() + ";");
-				writer.write(u.getNome() + ";");
-				writer.write(u.getTipo().ordinal() + ";");
-				writer.write(u.getEmail() + ";");
-				writer.write(u.getSenha() + ";");
-				writer.write(u.getMultaAte() + ";");
-				writer.write(u.getDocumento() + "\n");
+				updatedUsuarios.add(u);
 			} else {
-				writer.write(model.getId() + ";");
-				writer.write(model.getNome() + ";");
-				writer.write(model.getTipo().ordinal() + ";");
-				writer.write(model.getEmail() + ";");
-				writer.write(model.getSenha() + ";");
-				writer.write(model.getMultaAte() + ";");
-				writer.write(model.getDocumento() + "\n");
+				updatedUsuarios.add(model);
 			}
 		}
+
+		insertAll(updatedUsuarios);
 		return model;
 	}
 
