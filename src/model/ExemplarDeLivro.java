@@ -1,9 +1,7 @@
 package model;
 
-public class ExemplarDeLivro {
+public class ExemplarDeLivro extends Queryable {
 
-	protected int id;
-	
 	protected boolean disponivel;
 	
 	protected boolean reservado;
@@ -14,14 +12,6 @@ public class ExemplarDeLivro {
 	
 	protected int anoDeLancamento;
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public boolean isDisponivel() {
 		return disponivel;
 	}

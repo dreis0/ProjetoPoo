@@ -1,15 +1,9 @@
 package txtRepository;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
 
-import exceptions.NotFoundException;
 import model.ExemplarDeLivro;
-import model.Usuario;
 import utils.Strings;
 
 public class ExemplarDeLivroRepository extends BaseRepository<ExemplarDeLivro> {
@@ -27,12 +21,13 @@ public class ExemplarDeLivroRepository extends BaseRepository<ExemplarDeLivro> {
 		return instance;
 	}
 
-	private int id() throws IOException, FileNotFoundException {
+	@Override
+	protected int id() throws IOException, FileNotFoundException {
 		return Utils.getNextId(fileName);
 	}
 
 	@Override
-	protected String mapToString(ExemplarDeLivro model) throws IOException, FileNotFoundException {
+	protected String mapToFieldsString(ExemplarDeLivro model) throws IOException, FileNotFoundException {
 		int id;
 		if (model.getId() == 0)
 			id = id();
@@ -58,60 +53,6 @@ public class ExemplarDeLivroRepository extends BaseRepository<ExemplarDeLivro> {
 		exemplar.setAnoDeLancamento(Integer.parseInt(campos[5]));
 
 		return exemplar;
-	}
-
-	@Override
-	public ExemplarDeLivro getById(int id)
-			throws IOException, FileNotFoundException, NotFoundException, ParseException {
-
-		ArrayList<ExemplarDeLivro> livros = get();
-
-		for (ExemplarDeLivro l : livros) {
-			if (l.getId() == id)
-				return l;
-		}
-
-		throw new NotFoundException("Usuário");
-	}
-
-	@Override
-	public ArrayList<ExemplarDeLivro> get() throws IOException, FileNotFoundException, ParseException {
-
-		ArrayList<ExemplarDeLivro> exemplares = new ArrayList<ExemplarDeLivro>();
-
-		String currentLine;
-		reader = new BufferedReader(new FileReader(fileName));
-
-		while ((currentLine = reader.readLine()) != null) {
-			exemplares.add(mapToModel(currentLine));
-		}
-
-		return exemplares;
-	}
-
-	@Override
-	public ExemplarDeLivro insert(ExemplarDeLivro model) throws IOException, FileNotFoundException {
-		writer.append(mapToString(model));
-
-		return model;
-	}
-
-	@Override
-	public ExemplarDeLivro update(ExemplarDeLivro model) throws IOException, FileNotFoundException, ParseException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteById(int id) throws IOException, ParseException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void insertAll(ArrayList<ExemplarDeLivro> list) throws IOException, FileNotFoundException {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

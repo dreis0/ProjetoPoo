@@ -3,11 +3,11 @@ package model;
 import java.text.ParseException;
 import java.util.Date;
 
+import javax.management.Query;
+
 import utils.Strings;
 
-public abstract class Usuario {
-
-	protected int id;
+public abstract class Usuario extends Queryable{
 
 	protected TipoDeUsuario tipo;
 
@@ -58,14 +58,6 @@ public abstract class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = (senha);
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public Date getMultaAte() {
