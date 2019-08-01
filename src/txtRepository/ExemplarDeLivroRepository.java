@@ -31,11 +31,10 @@ public class ExemplarDeLivroRepository extends BaseRepository<ExemplarDeLivro> {
 		int id;
 		if (model.getId() == 0)
 			id = id();
-		else
-			id = model.getId();
+		else id = model.getId();
 
-		return (id + Strings.DELIMITADOR + model.isDisponivel() + Strings.DELIMITADOR + model.isReservado()
-				+ Strings.DELIMITADOR + model.getEdicao() + Strings.DELIMITADOR + model.getEditora()
+		return (id + Strings.DELIMITADOR + model.getLivroId() + Strings.DELIMITADOR +  model.isDisponivel() + Strings.DELIMITADOR 
+				+ model.isReservado() + Strings.DELIMITADOR + model.getEdicao() + Strings.DELIMITADOR + model.getEditora()
 				+ Strings.DELIMITADOR + model.getAnoDeLancamento() + "\n");
 	}
 
@@ -46,11 +45,12 @@ public class ExemplarDeLivroRepository extends BaseRepository<ExemplarDeLivro> {
 		ExemplarDeLivro exemplar = new ExemplarDeLivro();
 
 		exemplar.setId(Integer.parseInt(campos[0]));
-		exemplar.setDisponivel(Boolean.getBoolean(campos[1]));
-		exemplar.setReservado(Boolean.getBoolean(campos[2]));
-		exemplar.setEdicao(Integer.parseInt(campos[3]));
-		exemplar.setEditora(campos[4]);
-		exemplar.setAnoDeLancamento(Integer.parseInt(campos[5]));
+		exemplar.setLivroId(Integer.parseInt(campos[1]));
+		exemplar.setDisponivel(Boolean.getBoolean(campos[2]));
+		exemplar.setReservado(Boolean.getBoolean(campos[3]));
+		exemplar.setEdicao(Integer.parseInt(campos[4]));
+		exemplar.setEditora(campos[5]);
+		exemplar.setAnoDeLancamento(Integer.parseInt(campos[6]));
 
 		return exemplar;
 	}

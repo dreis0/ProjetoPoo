@@ -2,16 +2,26 @@ package model;
 
 public class ExemplarDeLivro extends Queryable {
 
+	protected int livroId;
+
 	protected boolean disponivel;
-	
+
 	protected boolean reservado;
-	
+
 	protected int edicao;
-	
+
 	protected String editora = "";
-	
+
 	protected int anoDeLancamento;
-	
+
+	public int getLivroId() {
+		return this.livroId;
+	}
+
+	public void setLivroId(int livroId) {
+		this.livroId = livroId;
+	}
+
 	public boolean isDisponivel() {
 		return disponivel;
 	}
@@ -52,5 +62,4 @@ public class ExemplarDeLivro extends Queryable {
 		this.anoDeLancamento = anoDeLancamento;
 	}
 
-	
 }
