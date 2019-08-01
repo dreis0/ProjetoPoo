@@ -34,6 +34,18 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 	}
 
 	@Override
+	protected String mapToString(Usuario model) throws IOException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Usuario mapToModel(String str) throws IOException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public Usuario getById(int id) throws FileNotFoundException, IOException, NotFoundException, ParseException {
 		ArrayList<Usuario> usuarios = get();
 
@@ -42,18 +54,20 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 				return u;
 		}
 
-		throw new NotFoundException("Usuï¿½rio");
+		throw new NotFoundException("Usuário");
 	}
 
 	@Override
 	public ArrayList<Usuario> get()
 			throws FileNotFoundException, IOException, IllegalArgumentException, ParseException {
+
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
 		String currentLine;
 		reader = new BufferedReader(new FileReader(fileName));
 		while ((currentLine = reader.readLine()) != null) {
 			String[] fields = currentLine.split(Strings.DELIMITADOR);
+			
 			Usuario u = Utils.instance(Utils.ToEnum(fields[2]));
 			u.setId(Integer.parseInt(fields[0]));
 			u.setNome(fields[1]);
@@ -69,8 +83,6 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRe
 	}
 
 	public Usuario insert(Usuario model) throws IOException {
-		System.out.println("insert");
-
 		writer.append(id() + Strings.DELIMITADOR + model.getNome() + Strings.DELIMITADOR + model.getTipo().ordinal()
 				+ Strings.DELIMITADOR + model.getEmail() + Strings.DELIMITADOR + model.getSenha() + Strings.DELIMITADOR
 				+ model.getMultaAte() + Strings.DELIMITADOR + model.getDocumento() + "\n");

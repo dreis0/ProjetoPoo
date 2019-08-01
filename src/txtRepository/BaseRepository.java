@@ -2,7 +2,6 @@ package txtRepository;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -22,6 +21,8 @@ public abstract class BaseRepository<T> implements ITxtRepository<T>, AutoClosea
 		this.reader = new BufferedReader(new FileReader(fileName));
 	}
 
+	protected abstract String mapToString(T model) throws IOException, FileNotFoundException;
+	protected abstract T mapToModel(String str) throws IOException, FileNotFoundException;
 	protected abstract void insertAll(ArrayList<T> list) throws IOException, FileNotFoundException;
 	
 	@Override
