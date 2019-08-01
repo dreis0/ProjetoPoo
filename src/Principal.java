@@ -1,26 +1,29 @@
 import model.Aluno;
+import model.ExemplarDeLivro;
+import model.Livro;
+import model.Usuario;
+import txtRepository.ExemplarDeLivroRepository;
+import txtRepository.LivroRepository;
 import txtRepository.UsuarioRepository;
 
 public class Principal {
 
 	public static void main(String[] args) {
-		Aluno aluno = new Aluno();
 
-		aluno.setDocumento("11201721123");
-		aluno.setEmail("email@email.com");
-		aluno.setNome("Nome");
-		aluno.setSenha("123");
-
-		try (UsuarioRepository repository = UsuarioRepository.instance()) {
-
-			Aluno aluno2 = new Aluno();
-			aluno2 = (Aluno) repository.getById(1);
-			aluno2.setNome("Outro");
-			repository.update(aluno2);
-
-			// repository.deleteById(2);
-			// repository.insert(aluno);
-
+		try (ExemplarDeLivroRepository repository = ExemplarDeLivroRepository.instance()) {
+			ExemplarDeLivro exemplar = new ExemplarDeLivro();
+			
+			exemplar.setDisponivel(true);
+			exemplar.setReservado(false);
+			exemplar.setAnoDeLancamento(1900);
+			exemplar.setEditora("Editora 2 ");
+			exemplar.setLivroId(1);
+			exemplar.setEdicao(15);
+			
+			repository.insert(exemplar);
+			
+			
+			
 		} catch (Exception e) {
 			System.out.println("Exception em Principal: " + e);
 		}
