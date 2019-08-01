@@ -1,16 +1,10 @@
 package model;
 
-public class Livro {
-
-	protected int id;
+public class Livro extends Queryable {
 
 	protected String titulo = "";
 
 	protected String autor = "";
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getTitulo() {
 		return titulo;

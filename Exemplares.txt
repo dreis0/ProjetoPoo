@@ -1,0 +1,2 @@
+1;1;true;false;1;Editora;1990
+2;1;true;false;15;Editora 2 ;1900

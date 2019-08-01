@@ -1,4 +1,4 @@
-1;Nome;4;email@email.com;123;Tue Jul 30 11:57:49 BRT 2019;11201721123
+1;Novo;2;emailNovo@email.com;nova;Thu Aug 01 11:57:01 BRT 2019;11201721000
 5;Nome;4;email@email.com;123;Tue Jul 30 12:03:36 BRT 2019;11201721123
 6;Nome;4;email@email.com;123;Tue Jul 30 12:03:43 BRT 2019;11201721123
 7;Nome;4;email@email.com;123;Wed Jul 31 08:54:42 BRT 2019;11201721123
