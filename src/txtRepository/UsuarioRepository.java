@@ -1,20 +1,14 @@
 package txtRepository;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 
-import exceptions.NotFoundException;
-import interfaces.ITxtRepository;
+import interfaces.IRepository;
 import model.Usuario;
 import utils.Strings;
 
-public class UsuarioRepository extends BaseRepository<Usuario> implements ITxtRepository<Usuario> {
+public class UsuarioRepository extends BaseRepository<Usuario> implements IRepository<Usuario> {
 
 	private static UsuarioRepository instance;
 

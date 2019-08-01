@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import exceptions.NotFoundException;
 
-public interface ITxtRepository<T> extends AutoCloseable {
+public interface IRepository<T> extends AutoCloseable {
 
 	public T getById(int id) throws IOException, FileNotFoundException, NotFoundException, ParseException;
 

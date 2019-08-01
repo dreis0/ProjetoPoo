@@ -3,10 +3,7 @@ package txtRepository;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 
-import exceptions.NotFoundException;
-import interfaces.ITxtRepository;
 import model.Emprestimo;
 
 public class EmprestimoRepository extends BaseRepository<Emprestimo> {

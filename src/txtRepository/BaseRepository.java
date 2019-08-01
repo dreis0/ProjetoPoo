@@ -10,11 +10,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import exceptions.NotFoundException;
-import interfaces.ITxtRepository;
+import interfaces.IRepository;
 import model.Queryable;
 import utils.Strings;
 
-public abstract class BaseRepository<T> implements ITxtRepository<T>, AutoCloseable {
+public abstract class BaseRepository<T> implements IRepository<T>, AutoCloseable {
 
 	protected BufferedWriter writer;
 	protected BufferedReader reader;
