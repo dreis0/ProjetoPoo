@@ -19,7 +19,7 @@ public class LivroRepository extends BaseRepository<Livro> {
 		super("Livros.txt");
 	}
 
-	public LivroRepository instance() throws IOException, FileNotFoundException {
+	public static LivroRepository instance() throws IOException, FileNotFoundException {
 		if (instance == null)
 			instance = new LivroRepository();
 		return instance;
@@ -32,7 +32,12 @@ public class LivroRepository extends BaseRepository<Livro> {
 
 	@Override
 	protected String mapToFieldsString(Livro model) throws IOException, FileNotFoundException {
-		return model.getId() + Strings.DELIMITADOR + model.getTitulo() + Strings.DELIMITADOR + model.getAutor() + "\n";
+		int id;
+		if(model.getId() == 0)
+			id = id();
+		else id = model.getId();  
+				
+		return id + Strings.DELIMITADOR + model.getTitulo() + Strings.DELIMITADOR + model.getAutor() + "\n";
 	}
 
 	@Override
