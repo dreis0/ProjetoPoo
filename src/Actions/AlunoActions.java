@@ -21,6 +21,7 @@ public class AlunoActions extends BaseUserActions {
 
 	private final int diasDeEmprestimo = 30;
 	private final int limiteDeLivros = 5;
+	private final int diasDeMultaPorDiaDeAtraso = 5;
 
 	public AlunoActions(IRepository<Usuario> usuarioRepository, IRepository<Livro> livroRepository,
 			IRepository<ExemplarDeLivro> exemplarRepository, IRepository<Emprestimo> emprestimoRepository) {
@@ -57,7 +58,7 @@ public class AlunoActions extends BaseUserActions {
 
 			int diasDeMulta = (int) ChronoUnit.DAYS.between(emprestimo.getDataDeEmprestimo().plusDays(diasDeEmprestimo),
 					LocalDate.now());
-			aluno.setMultaAte(LocalDate.now().plusDays(diasDeMulta));
+			aluno.setMultaAte(LocalDate.now().plusDays(diasDeMulta * diasDeMultaPorDiaDeAtraso));
 			usuarioRepository.update(aluno);
 		}
 
@@ -66,13 +67,3 @@ public class AlunoActions extends BaseUserActions {
 		emprestimoRepository.update(emprestimo);
 	}
 }
-
-
-
-
-
-
-
-
-
-
