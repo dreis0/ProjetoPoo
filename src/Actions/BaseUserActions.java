@@ -42,7 +42,7 @@ public abstract class BaseUserActions implements IUserActions {
 	}
 
 	@Override
-	public ArrayList<Emprestimo> obterLivrosEmprestados(int usuarioId)
+	public ArrayList<Emprestimo> getLivrosEmprestados(int usuarioId)
 			throws FileNotFoundException, IOException, ParseException {
 		ArrayList<Emprestimo> emprestimosExistentes = emprestimoRepository.get();
 		ArrayList<Emprestimo> emprestimosDoUsuario = new ArrayList<Emprestimo>();

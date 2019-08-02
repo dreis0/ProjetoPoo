@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import exceptions.LimiteDeLivrosAtingidosException;
 import exceptions.NaoPodeAlugarException;
+import exceptions.NotFoundException;
 import interfaces.IRepository;
 import model.Emprestimo;
 import model.ExemplarDeLivro;
@@ -31,7 +33,7 @@ public class AlunoActions extends BaseUserActions {
 
 		if (usuario.getMultaAte().isAfter(LocalDate.now()))
 			throw new NaoPodeAlugarException();
-		if (obterLivrosEmprestados(usuario.getId()).toArray().length >= limiteDeLivros)
+		if (getLivrosEmprestados(usuario.getId()).toArray().length >= limiteDeLivros)
 			throw new LimiteDeLivrosAtingidosException(limiteDeLivros);
 
 		Emprestimo emprestimo = new Emprestimo();
@@ -47,7 +49,30 @@ public class AlunoActions extends BaseUserActions {
 	}
 
 	@Override
-	public void Devolver(Usuario usuario, Emprestimo emprestimo) {
+	public void Devolver(Emprestimo emprestimo)
+			throws NotFoundException, FileNotFoundException, IOException, ParseException {
 
+		if (emprestimo.getDataDeEmprestimo().plusDays(diasDeEmprestimo).isAfter(LocalDate.now())) {
+			Usuario aluno = usuarioRepository.getById(emprestimo.getUsuarioId());
+
+			int diasDeMulta = (int) ChronoUnit.DAYS.between(emprestimo.getDataDeEmprestimo().plusDays(diasDeEmprestimo),
+					LocalDate.now());
+			aluno.setMultaAte(LocalDate.now().plusDays(diasDeMulta));
+			usuarioRepository.update(aluno);
+		}
+
+		emprestimo.setDataDaDevolucao(LocalDate.now());
+
+		emprestimoRepository.update(emprestimo);
 	}
 }
+
+
+
+
+
+
+
+
+
+
