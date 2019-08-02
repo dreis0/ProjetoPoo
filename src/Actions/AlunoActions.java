@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.text.ParseException;
+import java.time.LocalDate;
 
 import exceptions.LimiteDeLivrosAtingidosException;
 import exceptions.NaoPodeAlugarException;
@@ -25,10 +26,10 @@ public class AlunoActions extends BaseUserActions {
 	}
 
 	@Override
-	public Emprestimo alugar(Usuario usuario, ExemplarDeLivro exemplar)
-			throws NaoPodeAlugarException, LimiteDeLivrosAtingidosException, FileNotFoundException, IOException, ParseException {
+	public Emprestimo alugar(Usuario usuario, ExemplarDeLivro exemplar) throws NaoPodeAlugarException,
+			LimiteDeLivrosAtingidosException, FileNotFoundException, IOException, ParseException {
 
-		if (usuario.getMultaAte().compareTo(Calendar.getInstance().getTime()) > 0)
+		if (usuario.getMultaAte().isAfter(LocalDate.now()))
 			throw new NaoPodeAlugarException();
 		if (obterLivrosEmprestados(usuario.getId()).toArray().length >= limiteDeLivros)
 			throw new LimiteDeLivrosAtingidosException(limiteDeLivros);
@@ -38,15 +39,15 @@ public class AlunoActions extends BaseUserActions {
 		emprestimo.setUsuarioId(usuario.getId());
 		emprestimo.setPrazoDeDevolucao(diasDeEmprestimo);
 		emprestimo.setExemplarId(exemplar.getId());
-		emprestimo.setDataDeEmprestimo(Calendar.getInstance().getTime());
-		
+		emprestimo.setDataDeEmprestimo(LocalDate.now());
+
 		emprestimoRepository.insert(emprestimo);
-		
+
 		return emprestimo;
 	}
 
 	@Override
 	public void Devolver(Usuario usuario, Emprestimo emprestimo) {
-		
+
 	}
 }

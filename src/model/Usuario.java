@@ -1,10 +1,12 @@
 package model;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.management.Query;
 
+import utils.DateUtils;
 import utils.Strings;
 
 public abstract class Usuario extends Queryable{
@@ -19,7 +21,7 @@ public abstract class Usuario extends Queryable{
 
 	protected String documento = "";
 
-	protected Date multaAte = new Date();
+	protected LocalDate multaAte = LocalDate.MIN;
 
 	private String formatEntries(String str) {
 		if (str == null)
@@ -60,16 +62,16 @@ public abstract class Usuario extends Queryable{
 		this.senha = (senha);
 	}
 
-	public Date getMultaAte() {
+	public LocalDate getMultaAte() {
 		return multaAte;
 	}
 
-	public void setMultaAte(Date multaAte) {
+	public void setMultaAte(LocalDate multaAte) {
 		this.multaAte = multaAte;
 	}
 
 	public void setMultaAte(String multaAte) throws ParseException {
-		this.multaAte = Strings.FORMATO_DATA_GENERICO.parse(multaAte);;
+		this.multaAte = LocalDate.parse(multaAte, DateUtils.FORMATO_PADRAO);
 	}
 
 	public String getDocumento() {

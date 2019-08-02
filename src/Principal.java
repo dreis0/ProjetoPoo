@@ -10,20 +10,15 @@ public class Principal {
 
 	public static void main(String[] args) {
 
-		try (ExemplarDeLivroRepository repository = ExemplarDeLivroRepository.instance()) {
-			ExemplarDeLivro exemplar = new ExemplarDeLivro();
-			
-			exemplar.setDisponivel(true);
-			exemplar.setReservado(false);
-			exemplar.setAnoDeLancamento(1900);
-			exemplar.setEditora("Editora 2 ");
-			exemplar.setLivroId(1);
-			exemplar.setEdicao(15);
-			
-			repository.insert(exemplar);
-			
-			
-			
+		try (UsuarioRepository repository = UsuarioRepository.instance()) {
+			Usuario a = new Aluno();
+
+			a.setNome("Miguel");
+			a.setSenha("1234");
+			a.setDocumento("11201721111");
+
+			repository.insert(a);
+
 		} catch (Exception e) {
 			System.out.println("Exception em Principal: " + e);
 		}

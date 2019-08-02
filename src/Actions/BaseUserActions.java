@@ -3,6 +3,7 @@ package Actions;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import interfaces.IRepository;
@@ -26,30 +27,31 @@ public abstract class BaseUserActions implements IUserActions {
 		this.exemplaresRepository = exemplarRepository;
 		this.emprestimoRepository = emprestimoRepository;
 	}
-	
+
 	@Override
-	public ArrayList<Emprestimo> consultaHistorico(int usuarioId) 
+	public ArrayList<Emprestimo> consultaHistorico(int usuarioId)
 			throws FileNotFoundException, IOException, ParseException {
 		ArrayList<Emprestimo> emprestimosExistentes = emprestimoRepository.get();
 		ArrayList<Emprestimo> emprestimosDoUsuario = new ArrayList<Emprestimo>();
-		
-		for(Emprestimo e: emprestimosExistentes) 
-			if(e.getUsuarioId() == usuarioId)
+
+		for (Emprestimo e : emprestimosExistentes)
+			if (e.getUsuarioId() == usuarioId)
 				emprestimosDoUsuario.add(e);
-		
+
 		return emprestimosDoUsuario;
 	}
-	
+
 	@Override
-	public ArrayList<Emprestimo> obterLivrosEmprestados(int usuarioId) 
+	public ArrayList<Emprestimo> obterLivrosEmprestados(int usuarioId)
 			throws FileNotFoundException, IOException, ParseException {
 		ArrayList<Emprestimo> emprestimosExistentes = emprestimoRepository.get();
 		ArrayList<Emprestimo> emprestimosDoUsuario = new ArrayList<Emprestimo>();
-		
-		for(Emprestimo e: emprestimosExistentes) 
-			if(e.getUsuarioId() == usuarioId)
-				if(e.getDataDeDevolucao().)
-				
-		return null;
+
+		for (Emprestimo e : emprestimosExistentes)
+			if (e.getUsuarioId() == usuarioId)
+				if (e.getDataDaDevolucao().isAfter(LocalDate.MIN))
+					emprestimosDoUsuario.add(e);
+
+		return emprestimosDoUsuario;
 	}
 }

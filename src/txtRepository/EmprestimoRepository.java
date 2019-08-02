@@ -50,9 +50,9 @@ public class EmprestimoRepository extends BaseRepository<Emprestimo> {
 		emprestimo.setId(Integer.parseInt(fields[0]));
 		emprestimo.setUsuarioId(Integer.parseInt(fields[1]));
 		emprestimo.setExemplarId(Integer.parseInt(fields[2]));
-		emprestimo.setDataDeEmprestimo(new Date(fields[3]));
+		emprestimo.setDataDeEmprestimo(fields[3]);
 		emprestimo.setPrazoDeDevolucao(Integer.parseInt(fields[4]));
-		emprestimo.setDataDaDevolucao(new Date(fields[5]));
+		emprestimo.setDataDaDevolucao(fields[5]);
 
 		return emprestimo;
 	}

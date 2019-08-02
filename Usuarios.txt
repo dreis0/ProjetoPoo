@@ -1,9 +1,1 @@
-1;Novo;2;emailNovo@email.com;nova;Thu Aug 01 11:57:01 BRT 2019;11201721000
-5;Nome;4;email@email.com;123;Tue Jul 30 12:03:36 BRT 2019;11201721123
-6;Nome;4;email@email.com;123;Tue Jul 30 12:03:43 BRT 2019;11201721123
-7;Nome;4;email@email.com;123;Wed Jul 31 08:54:42 BRT 2019;11201721123
-8;Nome;4;email@email.com;123;Wed Jul 31 08:54:47 BRT 2019;11201721123
-9;Nome;4;email@email.com;123;Wed Jul 31 08:54:49 BRT 2019;11201721123
-10;Nome;4;email@email.com;123;Wed Jul 31 08:54:50 BRT 2019;11201721123
-11;Nome;4;email@email.com;123;Wed Jul 31 08:54:52 BRT 2019;11201721123
-12;Nome;2;email@email.com;123;Wed Jul 31 08:54:57 BRT 2019;11201721123
+1;Miguel;2;;1234;-999999999-01-01;11201721111
