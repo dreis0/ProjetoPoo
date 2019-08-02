@@ -46,28 +46,7 @@ public class AlunoActions extends BaseUserActions {
 	}
 
 	@Override
-	public ArrayList<Emprestimo> obterLivrosEmprestados(int usuarioId) 
-			throws FileNotFoundException, IOException, ParseException, java.text.ParseException {
-		ArrayList<Emprestimo> emprestimosExistentes = emprestimoRepository.get();
-		ArrayList<Emprestimo> emprestimosDoUsuario = new ArrayList<Emprestimo>();
+	public void Devolver(Usuario usuario, Emprestimo emprestimo) {
 		
-		for(Emprestimo e: emprestimosExistentes) 
-			if(e.getUsuarioId() == usuarioId)
-				if(e.getDataDeDevolucao().)
-				
-		return null;
 	}
-
-	@Override
-	public void Devolver(Emprestimo emprestimo) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public ArrayList<Emprestimo> consultaHistorico(int usuarioId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

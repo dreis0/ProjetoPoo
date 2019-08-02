@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.text.ParseException;
 
-
 import exceptions.LimiteDeLivrosAtingidosException;
 import exceptions.NaoPodeAlugarException;
 import model.Emprestimo;
@@ -17,10 +16,11 @@ public interface IUserActions {
 	public Emprestimo alugar(Usuario usuario, ExemplarDeLivro exemplar) throws NaoPodeAlugarException,
 			LimiteDeLivrosAtingidosException, FileNotFoundException, IOException, ParseException;
 
-	public void Devolver(Emprestimo emprestimo);
+	public void Devolver(Usuario usuario, Emprestimo emprestimo);
 
 	public ArrayList<Emprestimo> obterLivrosEmprestados(int usuarioId)
 			throws FileNotFoundException, IOException, ParseException;
 
-	public ArrayList<Emprestimo> consultaHistorico(int usuarioId);
+	public ArrayList<Emprestimo> consultaHistorico(int usuarioId)
+			throws FileNotFoundException, IOException, ParseException, java.text.ParseException;
 }

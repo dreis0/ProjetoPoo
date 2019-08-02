@@ -16,7 +16,7 @@ import txtRepository.UsuarioRepository;
 
 public class RepositoryFactory<T> implements IRepositoryFactory {
 
-	public IRepository<Usuario> getUsuarioRepository() throws IOException, FileNotFoundException {
+	public  IRepository<Usuario> getUsuarioRepository() throws IOException, FileNotFoundException {
 		return UsuarioRepository.instance();
 	}
 
