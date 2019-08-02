@@ -14,6 +14,8 @@ public class ExemplarDeLivro extends Queryable {
 
 	protected int anoDeLancamento;
 
+	private Livro livro;
+
 	public int getLivroId() {
 		return this.livroId;
 	}
@@ -60,6 +62,14 @@ public class ExemplarDeLivro extends Queryable {
 
 	public void setAnoDeLancamento(int anoDeLancamento) {
 		this.anoDeLancamento = anoDeLancamento;
+	}
+
+	public Livro getLivro() {
+		return this.livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
 	}
 
 }

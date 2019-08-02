@@ -1,10 +1,9 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
 
-public class Emprestimo {
-
-	protected int id;
+public class Emprestimo extends Queryable {
 
 	protected int usuarioId;
 
@@ -55,9 +54,4 @@ public class Emprestimo {
 	public void setDataDaDevolucao(Date dataDaDevolucao) {
 		this.dataDaDevolucao = dataDaDevolucao;
 	}
-
-	public int getId() {
-		return id;
-	}
-
 }
