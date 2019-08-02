@@ -46,6 +46,8 @@ public class AlunoActions extends BaseUserActions {
 
 		emprestimoRepository.insert(emprestimo);
 
+		exemplar.setDisponivel(false);
+
 		return emprestimo;
 	}
 
@@ -65,5 +67,9 @@ public class AlunoActions extends BaseUserActions {
 		emprestimo.setDataDaDevolucao(LocalDate.now());
 
 		emprestimoRepository.update(emprestimo);
+
+		ExemplarDeLivro exemplar = exemplaresRepository.getById(emprestimo.getExemplarId());
+		exemplar.setDisponivel(true);
+		exemplaresRepository.update(exemplar);
 	}
 }

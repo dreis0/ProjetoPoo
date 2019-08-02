@@ -44,6 +44,8 @@ public class ProfessorActions extends BaseUserActions {
 
 		emprestimoRepository.insert(emprestimo);
 
+		exemplar.setDisponivel(false);
+		
 		return emprestimo;
 	}
 
@@ -64,6 +66,9 @@ public class ProfessorActions extends BaseUserActions {
 
 		emprestimoRepository.update(emprestimo);
 
+		ExemplarDeLivro exemplar = exemplaresRepository.getById(emprestimo.getExemplarId());
+		exemplar.setDisponivel(true);
+		exemplaresRepository.update(exemplar);
 	}
 
 }
