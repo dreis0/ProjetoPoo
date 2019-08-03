@@ -9,7 +9,7 @@ import model.Emprestimo;
 import model.ExemplarDeLivro;
 import model.Livro;
 
-public class AdminActions implements IAdminActions {
+public class AdminActions implements IBibliotecarioActions {
 
 	private IRepository<ExemplarDeLivro> exemplaresRepository;
 	private IRepository<Livro> livroRepository;
