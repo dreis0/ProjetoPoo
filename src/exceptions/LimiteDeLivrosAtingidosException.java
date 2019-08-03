@@ -3,7 +3,7 @@ package exceptions;
 public class LimiteDeLivrosAtingidosException extends Exception {
 
 	public LimiteDeLivrosAtingidosException(int limiteDeLivrosQuePodeAlugar) {
-		super("Esse usuário pode alugar até " + limiteDeLivrosQuePodeAlugar);
+		super("Esse usuï¿½rio pode alugar atï¿½ " + limiteDeLivrosQuePodeAlugar);
 		// TODO Auto-generated constructor stub
 	}
 }

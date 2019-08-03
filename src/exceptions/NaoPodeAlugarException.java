@@ -3,11 +3,11 @@ package exceptions;
 public class NaoPodeAlugarException extends Exception {
 
 	public NaoPodeAlugarException() {
-		super("Esse usuário está bloqueado de fazer novos empréstimos");
+		super("Esse usuï¿½rio estï¿½ bloqueado de fazer novos emprï¿½stimos");
 	}
 	
 	public NaoPodeAlugarException(int diasRestantesDeMulta) {
-		super("Esse usuário está bloqueado de fazer novos empréstimos por mais " + diasRestantesDeMulta + "dias");
+		super("Esse usuï¿½rio estï¿½ bloqueado de fazer novos emprï¿½stimos por mais " + diasRestantesDeMulta + "dias");
 	}
 
 
