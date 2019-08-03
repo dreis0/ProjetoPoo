@@ -8,7 +8,7 @@ import exceptions.NotFoundException;
 import model.ExemplarDeLivro;
 import model.Livro;
 
-public interface IAdminActions {
+public interface IBibliotecarioActions {
 	
 	public void cadastrarLivro(Livro livro) throws FileNotFoundException, IOException;
 	
