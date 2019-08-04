@@ -14,9 +14,20 @@ import txtRepository.ExemplarDeLivroRepository;
 import txtRepository.LivroRepository;
 import txtRepository.UsuarioRepository;
 
-public class RepositoryFactory<T> implements IRepositoryFactory {
+public class RepositoryFactory implements IRepositoryFactory {
 
-	public  IRepository<Usuario> getUsuarioRepository() throws IOException, FileNotFoundException {
+	private static RepositoryFactory instance;
+
+	private RepositoryFactory() {
+	}
+
+	public static RepositoryFactory instance() {
+		if (instance == null)
+			instance = new RepositoryFactory();
+		return instance;
+	}
+
+	public IRepository<Usuario> getUsuarioRepository() throws IOException, FileNotFoundException {
 		return UsuarioRepository.instance();
 	}
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import model.Livro;
 
-public interface IBibliotecaActions {
+public interface IBibliotecaActions extends AutoCloseable {
 
 	public ArrayList<Livro> getLivrosDisponiveis() throws IOException, FileNotFoundException, ParseException;
 }

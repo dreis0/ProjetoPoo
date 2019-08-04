@@ -2,10 +2,12 @@ package actions;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.NotActiveException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import exceptions.NotFoundException;
 import interfaces.IRepository;
 import interfaces.IUserActions;
 import model.Emprestimo;
@@ -26,6 +28,19 @@ public abstract class BaseUserActions implements IUserActions {
 		this.livroRepository = livroRepository;
 		this.exemplaresRepository = exemplarRepository;
 		this.emprestimoRepository = emprestimoRepository;
+	}
+
+	@Override
+	public Usuario getByEmail(String email)
+			throws FileNotFoundException, IOException, ParseException, ParseException, NotFoundException {
+		ArrayList<Usuario> usuarios = usuarioRepository.get();
+
+		for (Usuario u : usuarios) {
+			if (u.getEmail().equals(email))
+				return u;
+		}
+
+		throw new NotFoundException("Usuário");
 	}
 
 	@Override
@@ -53,5 +68,13 @@ public abstract class BaseUserActions implements IUserActions {
 					emprestimosDoUsuario.add(e);
 
 		return emprestimosDoUsuario;
+	}
+
+	@Override
+	public void close() throws Exception {
+		usuarioRepository.close();
+		exemplaresRepository.close();
+		emprestimoRepository.close();
+		livroRepository.close();
 	}
 }

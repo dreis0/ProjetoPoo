@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 import model.Emprestimo;
+import utils.DateUtils;
 import utils.Strings;
 
 public class EmprestimoRepository extends BaseRepository<Emprestimo> {
@@ -36,8 +37,9 @@ public class EmprestimoRepository extends BaseRepository<Emprestimo> {
 			id = model.getId();
 
 		return id + Strings.DELIMITADOR + model.getUsuarioId() + Strings.DELIMITADOR + model.getExemplarId()
-				+ Strings.DELIMITADOR + model.getDataDeEmprestimo() + Strings.DELIMITADOR + model.getPrazoDeDevolucao()
-				+ Strings.DELIMITADOR + model.getDataDaDevolucao() + "\n";
+				+ Strings.DELIMITADOR + model.getDataDeEmprestimo().format(DateUtils.FORMATO_PADRAO)
+				+ Strings.DELIMITADOR + model.getPrazoDeDevolucao() + Strings.DELIMITADOR
+				+ model.getDataDaDevolucao().format(DateUtils.FORMATO_PADRAO) + "\n";
 	}
 
 	@Override

@@ -9,7 +9,7 @@ import javax.management.Query;
 import utils.DateUtils;
 import utils.Strings;
 
-public abstract class Usuario extends Queryable{
+public abstract class Usuario extends Queryable {
 
 	protected TipoDeUsuario tipo;
 
@@ -21,7 +21,7 @@ public abstract class Usuario extends Queryable{
 
 	protected String documento = "";
 
-	protected LocalDate multaAte = LocalDate.MIN;
+	protected LocalDate multaAte = DateUtils.minDate();
 
 	private String formatEntries(String str) {
 		if (str == null)
@@ -33,7 +33,7 @@ public abstract class Usuario extends Queryable{
 	public Usuario(TipoDeUsuario tipo) {
 		this.tipo = tipo;
 	}
-	
+
 	public TipoDeUsuario getTipo() {
 		return this.tipo;
 	}
@@ -63,6 +63,8 @@ public abstract class Usuario extends Queryable{
 	}
 
 	public LocalDate getMultaAte() {
+		if (multaAte == null)
+			return LocalDate.MIN;
 		return multaAte;
 	}
 

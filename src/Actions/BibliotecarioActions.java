@@ -56,4 +56,9 @@ public class BibliotecarioActions implements IBibliotecarioActions {
 		livroRepository.deleteById(livro.getId());
 	}
 
+	@Override
+	public void close() throws Exception {
+		livroRepository.close();
+	}
+
 }

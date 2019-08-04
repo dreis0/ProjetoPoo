@@ -6,6 +6,7 @@ import java.text.ParseException;
 
 import interfaces.IRepository;
 import model.Usuario;
+import utils.DateUtils;
 import utils.Strings;
 
 public class UsuarioRepository extends BaseRepository<Usuario> implements IRepository<Usuario> {
@@ -37,7 +38,8 @@ public class UsuarioRepository extends BaseRepository<Usuario> implements IRepos
 
 		return id + Strings.DELIMITADOR + model.getNome() + Strings.DELIMITADOR + model.getTipo().ordinal()
 				+ Strings.DELIMITADOR + model.getEmail() + Strings.DELIMITADOR + model.getSenha() + Strings.DELIMITADOR
-				+ model.getMultaAte() + Strings.DELIMITADOR + model.getDocumento() + "\n";
+				+ model.getMultaAte().format(DateUtils.FORMATO_PADRAO) + Strings.DELIMITADOR + model.getDocumento()
+				+ "\n";
 	}
 
 	@Override

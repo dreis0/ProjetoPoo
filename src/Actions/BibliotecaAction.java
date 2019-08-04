@@ -40,4 +40,10 @@ public class BibliotecaAction implements IBibliotecaActions {
 		return disponiveis;
 	}
 
+	@Override
+	public void close() throws Exception {
+		exemplaresRepository.close();
+		livrosRepository.close();
+	}
+
 }

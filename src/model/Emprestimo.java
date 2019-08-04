@@ -12,11 +12,11 @@ public class Emprestimo extends Queryable {
 
 	protected int exemplarId;
 
-	protected LocalDate dataDeEmprestimo = LocalDate.MIN;
+	protected LocalDate dataDeEmprestimo = DateUtils.minDate();
 
 	protected int prazoDeDevolucao;
 
-	protected LocalDate dataDaDevolucao = LocalDate.MIN;
+	protected LocalDate dataDaDevolucao = DateUtils.minDate();
 
 	public int getUsuarioId() {
 		return usuarioId;
