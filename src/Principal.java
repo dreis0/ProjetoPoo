@@ -5,10 +5,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import areas.AreaDoBibliotecario;
-import areas.AreaDoMaster;
-import areas.AreaDoUsuario;
-import areas.Resolver;
+import areas.*;
 import exceptions.AutenticacaoInvalidaException;
 import factory.ActionsFactory;
 import factory.RepositoryFactory;

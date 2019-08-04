@@ -29,7 +29,7 @@ public class ProfessorActions extends BaseUserActions {
 	@Override
 	public Emprestimo alugar(Usuario usuario, ExemplarDeLivro exemplar) throws NaoPodeAlugarException,
 			LimiteDeLivrosAtingidosException, FileNotFoundException, IOException, ParseException {
-		
+
 		if (usuario.getMultaAte().isAfter(LocalDate.now()))
 			throw new NaoPodeAlugarException();
 		if (getLivrosEmprestados(usuario.getId()).toArray().length >= limiteDeLivros)
@@ -45,15 +45,17 @@ public class ProfessorActions extends BaseUserActions {
 		emprestimoRepository.insert(emprestimo);
 
 		exemplar.setDisponivel(false);
+
+		exemplaresRepository.update(exemplar);
 		
 		return emprestimo;
 	}
 
 	@Override
-	public void Devolver(Emprestimo emprestimo)
+	public void devolver(Emprestimo emprestimo)
 			throws NotFoundException, FileNotFoundException, IOException, ParseException {
 		if (emprestimo.getDataDeEmprestimo().plusDays(diasDeEmprestimo).isAfter(LocalDate.now())) {
-			
+
 			Usuario professor = usuarioRepository.getById(emprestimo.getUsuarioId());
 
 			int diasDeMulta = (int) ChronoUnit.DAYS.between(emprestimo.getDataDeEmprestimo().plusDays(diasDeEmprestimo),

@@ -1,6 +1,6 @@
-0;master;0;master;master;19000101;Admin do Sistema
+1;master;0;master;master;19000101;Admin do Sistema
 1;Bibliotecario;1;bibliotecario;bibliotecario;19000101;3300000000
-2;Aluno;2;aluno;aluno;19000101;11201721000
+2;Aluno;2;aluno;aluno;20190307;11201721000
 3;Professor;3;professor;professor;19000101;1100000000
 4;Miguel;2;miguel;miguel;19000101;11201721738
 5;Henrique;2;henrique;henrique;19000101;11201721597

@@ -14,6 +14,7 @@ import model.Emprestimo;
 import model.ExemplarDeLivro;
 import model.Livro;
 import model.Usuario;
+import utils.DateUtils;
 
 public abstract class BaseUserActions implements IUserActions {
 
@@ -64,7 +65,7 @@ public abstract class BaseUserActions implements IUserActions {
 
 		for (Emprestimo e : emprestimosExistentes)
 			if (e.getUsuarioId() == usuarioId)
-				if (e.getDataDaDevolucao().isAfter(LocalDate.MIN))
+				if (!e.getDataDaDevolucao().isAfter(DateUtils.minDate()))
 					emprestimosDoUsuario.add(e);
 
 		return emprestimosDoUsuario;

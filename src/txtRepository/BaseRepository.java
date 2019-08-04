@@ -50,7 +50,7 @@ public abstract class BaseRepository<T> implements IRepository<T>, AutoCloseable
 				return item;
 		}
 
-		throw new NotFoundException("Usuário");
+		throw new NotFoundException(fileName.split(".")[0].substring(0, fileName.length() - 5));
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public abstract class BaseRepository<T> implements IRepository<T>, AutoCloseable
 		}
 
 		buffReader.close();
-		
+
 		return list;
 	}
 

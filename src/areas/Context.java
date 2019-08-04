@@ -1,3 +1,5 @@
+package areas;
+
 import model.Usuario;
 
 public class Context {

@@ -17,7 +17,7 @@ public interface IUserActions extends AutoCloseable {
 	public Emprestimo alugar(Usuario usuario, ExemplarDeLivro exemplar) throws NaoPodeAlugarException,
 			LimiteDeLivrosAtingidosException, FileNotFoundException, IOException, ParseException;
 
-	public void Devolver(Emprestimo emprestimo)
+	public void devolver(Emprestimo emprestimo)
 			throws NotFoundException, FileNotFoundException, IOException, ParseException;
 
 	public ArrayList<Emprestimo> getLivrosEmprestados(int usuarioId)

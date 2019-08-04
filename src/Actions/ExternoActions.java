@@ -45,12 +45,13 @@ public class ExternoActions extends BaseUserActions {
 		emprestimoRepository.insert(emprestimo);
 
 		exemplar.setDisponivel(false);
+		exemplaresRepository.update(exemplar);
 		
 		return emprestimo;
 	}
 
 	@Override
-	public void Devolver(Emprestimo emprestimo)
+	public void devolver(Emprestimo emprestimo)
 			throws NotFoundException, FileNotFoundException, IOException, ParseException {
 		if (emprestimo.getDataDeEmprestimo().plusDays(diasDeEmprestimo).isAfter(LocalDate.now())) {
 
