@@ -83,4 +83,8 @@ public abstract class Usuario extends Queryable {
 	public void setDocumento(String documento) {
 		this.documento = formatEntries(documento);
 	}
+
+	public String toString() {
+		return getId() + " - " + getNome() + " - " + getDocumento() + " - " + getTipo() + "\n";
+	}
 }

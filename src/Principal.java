@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import areas.AreaDoBibliotecario;
 import areas.AreaDoMaster;
 import areas.AreaDoUsuario;
+import areas.Resolver;
 import exceptions.AutenticacaoInvalidaException;
 import factory.ActionsFactory;
 import factory.RepositoryFactory;
@@ -18,26 +19,9 @@ import model.*;
 
 public class Principal {
 
-	public static void _main(String[] args) {
-		try (IRepository<Usuario> login = RepositoryFactory.instance().getUsuarioRepository()) {
-
-			Usuario u = new Master();
-
-			u.setNome("Master");
-			u.setDocumento("Admin do sistema");
-			u.setSenha("master");
-			u.setEmail("master");
-
-			login.insert(u);
-
-		} catch (Exception e) {
-			System.out.println("Erro: " + e.getLocalizedMessage());
-		}
-	}
-
 	public static void main(String[] args) {
 		int tentativas = 0;
-		while (tentativas < 5) {
+		while (tentativas < 2) {
 			try (ILogin login = ActionsFactory.instance().getLoginActions()) {
 
 				String email = JOptionPane.showInputDialog("Digite seu email \n");
@@ -46,7 +30,7 @@ public class Principal {
 
 				Context.setCurrentUser(login.login(email, senha));
 
-				System.out.println(Context.getCurrentUser().getNome());
+				Resolver.Resolve(Context.getCurrentUser());
 
 			} catch (AutenticacaoInvalidaException autException) {
 				JOptionPane.showInputDialog(autException.getLocalizedMessage());
