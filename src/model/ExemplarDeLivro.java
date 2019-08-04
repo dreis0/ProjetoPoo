@@ -4,9 +4,9 @@ public class ExemplarDeLivro extends Queryable {
 
 	protected int livroId;
 
-	protected boolean disponivel;
+	protected boolean disponivel = true;
 
-	protected boolean reservado;
+	protected boolean reservado = false;
 
 	protected int edicao;
 
@@ -72,4 +72,7 @@ public class ExemplarDeLivro extends Queryable {
 		this.livro = livro;
 	}
 
+	public String toString() {
+		return getId() + " - " + getEditora() + ", " + getEdicao() + "ª edição, " + getAnoDeLancamento() + " \n";
+	}
 }

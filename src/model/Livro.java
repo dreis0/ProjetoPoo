@@ -42,4 +42,8 @@ public class Livro extends Queryable {
 	public void addExemplar(ExemplarDeLivro exemplar) {
 		exemplares.add(exemplar);
 	}
+
+	public String toString() {
+		return getId() + " - " + getTitulo() + ", " + getAutor() + " \n";
+	}
 }

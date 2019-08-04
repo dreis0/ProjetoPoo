@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import exceptions.ExemplarSemPaiException;
+import exceptions.LivroEmprestadoException;
 import exceptions.NotFoundException;
 import interfaces.IBibliotecarioActions;
 import interfaces.IRepository;
@@ -41,18 +42,24 @@ public class BibliotecarioActions implements IBibliotecarioActions {
 	}
 
 	@Override
-	public void removerExemplar(ExemplarDeLivro exemplar) throws NotFoundException, IOException, ParseException {
+	public void removerExemplar(ExemplarDeLivro exemplar) throws NotFoundException, IOException, ParseException, LivroEmprestadoException {
+		ExemplarDeLivro ex = exemplarRepository.getById(exemplar.getId());
+		if(!ex.isDisponivel())
+			throw new LivroEmprestadoException();
 		exemplarRepository.deleteById(exemplar.getId());
 	}
 
 	@Override
-	public void removerLivro(Livro livro) throws NotFoundException, IOException, ParseException {
+	public void removerLivro(Livro livro) throws NotFoundException, IOException, ParseException, LivroEmprestadoException {
 		ArrayList<ExemplarDeLivro> exemplares = exemplarRepository.get();
 
-		for (ExemplarDeLivro e : exemplares)
-			if (e.getLivroId() == livro.getId())
+		for (ExemplarDeLivro e : exemplares) {			
+			if (e.getLivroId() == livro.getId()) {
+				if(!e.isDisponivel())
+					throw new LivroEmprestadoException();
 				exemplarRepository.deleteById(e.getId());
-
+			}
+		}
 		livroRepository.deleteById(livro.getId());
 	}
 

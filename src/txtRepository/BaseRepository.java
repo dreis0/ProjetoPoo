@@ -57,13 +57,15 @@ public abstract class BaseRepository<T> implements IRepository<T>, AutoCloseable
 	public ArrayList<T> get() throws IOException, FileNotFoundException, ParseException {
 		ArrayList<T> list = new ArrayList<T>();
 
-		reader = new BufferedReader(new FileReader(fileName));
+		BufferedReader buffReader = new BufferedReader(new FileReader(fileName));
 
 		String currentLine;
-		while ((currentLine = reader.readLine()) != null) {
+		while ((currentLine = buffReader.readLine()) != null) {
 			list.add(mapToModel(currentLine));
 		}
 
+		buffReader.close();
+		
 		return list;
 	}
 
