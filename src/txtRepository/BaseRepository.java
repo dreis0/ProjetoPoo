@@ -32,7 +32,6 @@ public abstract class BaseRepository<T> implements IRepository<T>, AutoCloseable
 
 	protected abstract T mapToModel(String fieldsString) throws IOException, FileNotFoundException, ParseException;
 
-	
 	protected void insertAll(ArrayList<T> list) throws IOException, FileNotFoundException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
 
@@ -51,27 +50,31 @@ public abstract class BaseRepository<T> implements IRepository<T>, AutoCloseable
 				return item;
 		}
 
-		throw new NotFoundException("Usuário");
+		throw new NotFoundException(fileName.split(".")[0].substring(0, fileName.length() - 5));
 	}
 
 	@Override
 	public ArrayList<T> get() throws IOException, FileNotFoundException, ParseException {
 		ArrayList<T> list = new ArrayList<T>();
 
-		reader = new BufferedReader(new FileReader(fileName));
+		BufferedReader buffReader = new BufferedReader(new FileReader(fileName));
 
 		String currentLine;
-		while ((currentLine = reader.readLine()) != null) {
+		while ((currentLine = buffReader.readLine()) != null) {
 			list.add(mapToModel(currentLine));
 		}
+
+		buffReader.close();
 
 		return list;
 	}
 
 	@Override
 	public T insert(T model) throws IOException, FileNotFoundException {
-		writer.append(mapToFieldsString(model));
+		BufferedWriter buffWriter = new BufferedWriter(new FileWriter(fileName, true));
 
+		buffWriter.append(mapToFieldsString(model));
+		buffWriter.close();
 		return model;
 	}
 
@@ -95,14 +98,15 @@ public abstract class BaseRepository<T> implements IRepository<T>, AutoCloseable
 
 	@Override
 	public void deleteById(int id) throws IOException, ParseException {
+		BufferedReader buffReader = new BufferedReader(new FileReader(fileName));
 		ArrayList<T> list = new ArrayList<T>();
 
 		String currentLine;
 
-		while ((currentLine = reader.readLine()) != null) {
+		while ((currentLine = buffReader.readLine()) != null) {
 			String[] fields = currentLine.split(Strings.DELIMITADOR);
 
-			if (Integer.parseInt(fields[0]) != id) 
+			if (Integer.parseInt(fields[0]) != id)
 				list.add(mapToModel(currentLine));
 		}
 

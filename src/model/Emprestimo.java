@@ -1,20 +1,26 @@
 package model;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
-public class Emprestimo {
+import utils.DateUtils;
 
-	protected int id;
+public class Emprestimo extends Queryable {
 
 	protected int usuarioId;
 
 	protected int exemplarId;
 
-	protected Date dataDeEmprestimo;
+	protected LocalDate dataDeEmprestimo = DateUtils.minDate();
 
 	protected int prazoDeDevolucao;
 
-	protected Date dataDaDevolucao;
+	protected LocalDate dataDaDevolucao = DateUtils.minDate();
+
+	protected Livro livro;
+
+	protected ExemplarDeLivro exemplar;
 
 	public int getUsuarioId() {
 		return usuarioId;
@@ -32,12 +38,16 @@ public class Emprestimo {
 		this.exemplarId = exemplarId;
 	}
 
-	public Date getDataDeEmprestimo() {
+	public LocalDate getDataDeEmprestimo() {
 		return dataDeEmprestimo;
 	}
 
-	public void setDataDeEmprestimo(Date dataDeEmprestimo) {
+	public void setDataDeEmprestimo(LocalDate dataDeEmprestimo) {
 		this.dataDeEmprestimo = dataDeEmprestimo;
+	}
+
+	public void setDataDeEmprestimo(String dataDeEmprestimo) {
+		this.dataDeEmprestimo = LocalDate.parse(dataDeEmprestimo, DateUtils.FORMATO_PADRAO);
 	}
 
 	public int getPrazoDeDevolucao() {
@@ -48,16 +58,31 @@ public class Emprestimo {
 		this.prazoDeDevolucao = prazoDeDevolucao;
 	}
 
-	public Date getDataDaDevolucao() {
+	public LocalDate getDataDaDevolucao() {
 		return dataDaDevolucao;
 	}
 
-	public void setDataDaDevolucao(Date dataDaDevolucao) {
+	public void setDataDaDevolucao(LocalDate dataDaDevolucao) {
 		this.dataDaDevolucao = dataDaDevolucao;
 	}
 
-	public int getId() {
-		return id;
+	public void setDataDaDevolucao(String dataDaDevolucao) {
+		this.dataDaDevolucao = LocalDate.parse(dataDaDevolucao, DateUtils.FORMATO_PADRAO);
 	}
 
+	public void setLivro(Livro livro) {
+		this.livro = livro;
+	}
+
+	public Livro getLivro() {
+		return this.livro;
+	}
+
+	public void setExemplar(ExemplarDeLivro exemplar) {
+		this.exemplar = exemplar;
+	}
+
+	public ExemplarDeLivro getExemplar() {
+		return this.exemplar;
+	}
 }

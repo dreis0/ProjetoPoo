@@ -24,7 +24,7 @@ public class Utils {
 				lastLine = currentLine;
 			}
 
-			if (lastLine != "") {
+			if (!lastLine.equals("")) {
 				String[] dados = lastLine.split(";");
 				return Integer.parseInt(dados[0]) + 1;
 			}
@@ -32,23 +32,23 @@ public class Utils {
 		} finally {
 			reader.close();
 		}
-		
+
 		return 1;
 	}
-	
+
 	public static TipoDeUsuario ToEnum(String enumAsString) {
-		if(enumAsString.equals("0"))
+		if (enumAsString.equals("0"))
 			return TipoDeUsuario.master;
-		if(enumAsString.equals("1"))
+		if (enumAsString.equals("1"))
 			return TipoDeUsuario.bibliotecario;
 		if (enumAsString.equals("2"))
 			return TipoDeUsuario.aluno;
-		if(enumAsString.equals("3"))
+		if (enumAsString.equals("3"))
 			return TipoDeUsuario.professor;
-		else 
-			return TipoDeUsuario.externo;			
+		else
+			return TipoDeUsuario.externo;
 	}
-	
+
 	public static Usuario instance(TipoDeUsuario tipo) {
 		Usuario user;
 		switch (tipo) {

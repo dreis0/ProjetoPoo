@@ -1,9 +1,8 @@
-1;Novo;2;emailNovo@email.com;nova;Thu Aug 01 11:57:01 BRT 2019;11201721000
-5;Nome;4;email@email.com;123;Tue Jul 30 12:03:36 BRT 2019;11201721123
-6;Nome;4;email@email.com;123;Tue Jul 30 12:03:43 BRT 2019;11201721123
-7;Nome;4;email@email.com;123;Wed Jul 31 08:54:42 BRT 2019;11201721123
-8;Nome;4;email@email.com;123;Wed Jul 31 08:54:47 BRT 2019;11201721123
-9;Nome;4;email@email.com;123;Wed Jul 31 08:54:49 BRT 2019;11201721123
-10;Nome;4;email@email.com;123;Wed Jul 31 08:54:50 BRT 2019;11201721123
-11;Nome;4;email@email.com;123;Wed Jul 31 08:54:52 BRT 2019;11201721123
-12;Nome;2;email@email.com;123;Wed Jul 31 08:54:57 BRT 2019;11201721123
+1;master;0;master;master;19000101;Admin do Sistema
+1;Bibliotecario;1;bibliotecario;bibliotecario;19000101;3300000000
+2;Aluno;2;aluno;aluno;20190307;11201721000
+3;Professor;3;professor;professor;19000101;1100000000
+4;Miguel;2;miguel;miguel;19000101;11201721738
+5;Henrique;2;henrique;henrique;19000101;11201721597
+6;Saul;3;saul;saul;19000101;11111111111
+7;Externo;4;externo;externo;19000101;externo
