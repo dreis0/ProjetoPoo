@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 
 import exceptions.LimiteDeLivrosAtingidosException;
 import exceptions.NaoPodeAlugarException;
+import exceptions.NenhumItemException;
 import exceptions.NotFoundException;
 import interfaces.IRepository;
 import model.Emprestimo;
@@ -30,7 +31,7 @@ public class AlunoActions extends BaseUserActions {
 
 	@Override
 	public Emprestimo alugar(Usuario usuario, ExemplarDeLivro exemplar) throws NaoPodeAlugarException,
-			LimiteDeLivrosAtingidosException, FileNotFoundException, IOException, ParseException {
+			LimiteDeLivrosAtingidosException, FileNotFoundException, IOException, ParseException, NenhumItemException {
 
 		if (usuario.getMultaAte().isAfter(LocalDate.now()))
 			throw new NaoPodeAlugarException();

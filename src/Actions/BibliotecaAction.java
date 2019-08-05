@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import exceptions.NenhumItemException;
 import exceptions.NotFoundException;
 import interfaces.IBibliotecaActions;
 import interfaces.IRepository;
@@ -33,7 +34,8 @@ public class BibliotecaAction implements IBibliotecaActions {
 	}
 
 	@Override
-	public ArrayList<Livro> getLivrosDisponiveis() throws IOException, FileNotFoundException, ParseException {
+	public ArrayList<Livro> getLivrosDisponiveis()
+			throws IOException, FileNotFoundException, ParseException, NenhumItemException {
 		ArrayList<Livro> livros = livrosRepository.get();
 		ArrayList<ExemplarDeLivro> exemplares = exemplaresRepository.get();
 
@@ -49,11 +51,14 @@ public class BibliotecaAction implements IBibliotecaActions {
 			if (l.getExemplares().toArray().length > 0)
 				disponiveis.add(l);
 
+		if (disponiveis.toArray().length == 0)
+			throw new NenhumItemException("livro");
+
 		return disponiveis;
 	}
 
 	@Override
-	public ArrayList<Livro> getLivros() throws FileNotFoundException, IOException, ParseException {
+	public ArrayList<Livro> getLivros() throws FileNotFoundException, IOException, ParseException, NenhumItemException {
 		ArrayList<Livro> livros = livrosRepository.get();
 		ArrayList<ExemplarDeLivro> exemplares = exemplaresRepository.get();
 
@@ -61,6 +66,9 @@ public class BibliotecaAction implements IBibliotecaActions {
 			for (ExemplarDeLivro e : exemplares)
 				if (l.getId() == e.getLivroId())
 					l.addExemplar(e);
+
+		if (livros.toArray().length == 0)
+			throw new NenhumItemException("livro");
 
 		return livros;
 	}

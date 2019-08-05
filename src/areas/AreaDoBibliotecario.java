@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import exceptions.LivroEmprestadoException;
+import exceptions.NenhumItemException;
 import exceptions.NotFoundException;
 import interfaces.IBibliotecaActions;
 import interfaces.IBibliotecarioActions;
+import jdk.nashorn.internal.scripts.JO;
 import model.ExemplarDeLivro;
 import model.Livro;
 
@@ -64,16 +66,13 @@ public class AreaDoBibliotecario {
 			String lista = "";
 			ArrayList<Livro> livros = bibliotecaActions.getLivros();
 
-			if (livros.toArray().length == 0) {
-				JOptionPane.showInputDialog("Nenhum livro cadastrado");
-				return;
-			}
-
 			for (Livro l : livros)
 				lista += l.toString();
 
 			JOptionPane.showInputDialog(lista);
 
+		} catch (NenhumItemException nenhumItemEx) {
+			JOptionPane.showInputDialog("Nenhum livro cadastrado");
 		} catch (Exception e) {
 			JOptionPane.showInputDialog("Erro ao exibir lista");
 		}
@@ -84,16 +83,13 @@ public class AreaDoBibliotecario {
 			String lista = "";
 			ArrayList<Livro> livros = bibliotecaActions.getLivrosDisponiveis();
 
-			if (livros.toArray().length == 0) {
-				JOptionPane.showInputDialog("Nenhum livro disponível");
-				return;
-			}
-
 			for (Livro l : livros)
 				lista += l.toString();
 
 			JOptionPane.showInputDialog(lista);
 
+		} catch (NenhumItemException nenhumItemEx) {
+			JOptionPane.showInputDialog("Nenhum livro disponível");
 		} catch (Exception e) {
 			JOptionPane.showInputDialog("Erro ao exibir lista");
 		}
@@ -124,6 +120,8 @@ public class AreaDoBibliotecario {
 
 			userActions.removerLivro(bibliotecaActions.getlivroById(Integer.parseInt(id)));
 
+		} catch (NenhumItemException nenhumItemEx) {
+			JOptionPane.showInputDialog("Nenhum livro cadastrado");
 		} catch (NotFoundException notFoundEx) {
 			JOptionPane.showInputDialog("Esse id não corresponde a nenhum livro");
 		} catch (ParseException parseEx) {
@@ -156,6 +154,8 @@ public class AreaDoBibliotecario {
 
 			userActions.cadastrarExemplar(ex);
 
+		} catch (NenhumItemException nenhumItemEx) {
+			JOptionPane.showInputDialog("Nenhum livro cadastrado");
 		} catch (ParseException parseEx) {
 			JOptionPane.showInputDialog("Input inválido");
 		} catch (NotFoundException notFoundEx) {
@@ -180,6 +180,8 @@ public class AreaDoBibliotecario {
 
 			userActions.removerExemplar(bibliotecaActions.getExemplarById(Integer.parseInt(id)));
 
+		} catch(NenhumItemException nenhumItemEx) {
+			JOptionPane.showInputDialog("Nenhum livro cadastrado");
 		} catch (ParseException parseEx) {
 			JOptionPane.showInputDialog("Id iválido");
 		} catch (LivroEmprestadoException emprestadoEx) {

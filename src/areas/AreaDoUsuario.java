@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import exceptions.LimiteDeLivrosAtingidosException;
 import exceptions.NaoPodeAlugarException;
+import exceptions.NenhumItemException;
 import exceptions.NotFoundException;
 import interfaces.IBibliotecaActions;
 import interfaces.IUserActions;
@@ -68,6 +69,8 @@ public class AreaDoUsuario {
 
 			actions.alugar(Context.getCurrentUser(), exemplar);
 
+		} catch (NenhumItemException nenhumITemEx) {
+			JOptionPane.showInputDialog("Nenhum livro disponível para empréstimo");
 		} catch (NotFoundException notFoundEx) {
 			JOptionPane.showInputDialog("Exemplar não encontrado a partir do id digitado");
 
@@ -88,11 +91,6 @@ public class AreaDoUsuario {
 	public void devolverLivro() {
 		try {
 			ArrayList<Emprestimo> emprestimos = actions.getLivrosEmprestados(Context.getCurrentUser().getId());
-			if (emprestimos.toArray().length == 0) {
-				JOptionPane.showInputDialog("Nenhum empréstimo registrado");
-				return;
-			}
-
 			ArrayList<ExemplarDeLivro> exemplares = new ArrayList<ExemplarDeLivro>();
 			ArrayList<Livro> livros = new ArrayList<Livro>();
 
@@ -127,6 +125,8 @@ public class AreaDoUsuario {
 
 			actions.devolver(devolucao);
 
+		} catch (NenhumItemException nenhumItemEx) {
+			JOptionPane.showInputDialog("Nenhum empréstimo registrado");
 		} catch (ParseException parseEx) {
 			JOptionPane.showInputDialog("Id inválido");
 		} catch (NotFoundException notFoundEx) {
@@ -142,7 +142,7 @@ public class AreaDoUsuario {
 
 			String lista = "";
 			for (Livro l : livros) {
-				lista += l.toString() + ": \n";
+				lista += l.getTitulo() + ", " + l.getAutor() + ": \n";
 				for (ExemplarDeLivro e : l.getExemplares())
 					lista += "      " + e.toString();
 			}
@@ -165,6 +165,11 @@ public class AreaDoUsuario {
 			ArrayList<ExemplarDeLivro> exemplares = new ArrayList<ExemplarDeLivro>();
 			ArrayList<Livro> livros = new ArrayList<Livro>();
 
+			if (emprestimos.toArray().length == 0) {
+				JOptionPane.showInputDialog("Nenhum empréstimo registrado");
+				return;
+			}
+
 			for (Emprestimo e : emprestimos) {
 				e.setExemplar(bibliotecaActions.getExemplarById(e.getExemplarId()));
 			}
@@ -175,13 +180,16 @@ public class AreaDoUsuario {
 
 			String lista = "";
 
-			for(Emprestimo e : emprestimos) {
-				lista += "Empréstimo em: " + e.getDataDeEmprestimo() + " - " + e.getLivro().getTitulo() 
-						+ ", " + e.getLivro().getAutor() + " " + e.getExemplar().getEdicao() + "/n";
+			for (Emprestimo e : emprestimos) {
+				lista += "Empréstimo em: " + e.getDataDeEmprestimo() + " - " + e.getLivro().getTitulo() + ", "
+						+ e.getLivro().getAutor() + " " + e.getExemplar().getEdicao() + "\n";
 			}
-			
+
 			JOptionPane.showInputDialog(lista);
-			
+
+		} catch (NenhumItemException nenhumItemEx) {
+			JOptionPane.showInputDialog("Nenhum empréstimo registrado");
+
 		} catch (Exception e) {
 			JOptionPane.showInputDialog("Erro ao exibir lista");
 		}

@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import exceptions.NenhumItemException;
 import exceptions.NotFoundException;
 import interfaces.IRepository;
 import interfaces.IUserActions;
@@ -46,7 +47,7 @@ public abstract class BaseUserActions implements IUserActions {
 
 	@Override
 	public ArrayList<Emprestimo> consultaHistorico(int usuarioId)
-			throws FileNotFoundException, IOException, ParseException {
+			throws FileNotFoundException, IOException, ParseException, NenhumItemException {
 		ArrayList<Emprestimo> emprestimosExistentes = emprestimoRepository.get();
 		ArrayList<Emprestimo> emprestimosDoUsuario = new ArrayList<Emprestimo>();
 
@@ -54,12 +55,15 @@ public abstract class BaseUserActions implements IUserActions {
 			if (e.getUsuarioId() == usuarioId)
 				emprestimosDoUsuario.add(e);
 
+		if(emprestimosDoUsuario.toArray().length == 0)
+			throw new NenhumItemException("empréstimo");
+		
 		return emprestimosDoUsuario;
 	}
 
 	@Override
 	public ArrayList<Emprestimo> getLivrosEmprestados(int usuarioId)
-			throws FileNotFoundException, IOException, ParseException {
+			throws FileNotFoundException, IOException, ParseException, NenhumItemException {
 		ArrayList<Emprestimo> emprestimosExistentes = emprestimoRepository.get();
 		ArrayList<Emprestimo> emprestimosDoUsuario = new ArrayList<Emprestimo>();
 
@@ -68,6 +72,9 @@ public abstract class BaseUserActions implements IUserActions {
 				if (!e.getDataDaDevolucao().isAfter(DateUtils.minDate()))
 					emprestimosDoUsuario.add(e);
 
+		if(emprestimosDoUsuario.toArray().length == 0)
+			throw new NenhumItemException("empréstimo");
+		
 		return emprestimosDoUsuario;
 	}
 
